@@ -15,7 +15,16 @@ const getPlayerChoice = () => {
   const playerChoice = prompt(
     "rock, paper or scissors ? choose wisely."
   ).toLowerCase();
-  return playerChoice;
+  if (
+    playerChoice !== "rock" &&
+    playerChoice !== "paper" &&
+    playerChoice !== "scissors"
+  ) {
+    console.log("Wrong Input. try again.");
+    return getPlayerChoice();
+  } else {
+    return playerChoice;
+  }
 };
 
 const logGameResult = (result, playerSelection, computerSelection) => {
@@ -27,6 +36,7 @@ const logGameResult = (result, playerSelection, computerSelection) => {
 };
 
 const playRound = (playerSelection, computerSelection) => {
+  console.log(playerSelection, computerSelection);
   switch (playerSelection + "-" + computerSelection) {
     case "rock-rock":
       logGameResult("Draw", playerSelection, computerSelection);
