@@ -1,5 +1,10 @@
 "use strict";
 
+const scores = {
+  player: 0,
+  computer: 0,
+};
+
 const getComputerChoice = () => {
   const choices = ["rock", "paper", "scissors"];
   const randomNumber = Math.trunc(Math.random() * 3);
@@ -13,36 +18,58 @@ const getPlayerChoice = () => {
   return playerChoice;
 };
 
+const logGameResult = (result, playerSelection, computerSelection) => {
+  console.log(`
+  ${result}! ${playerSelection} against ${computerSelection}.
+  your score: ${scores.player}
+  computer score: ${scores.computer}
+  `);
+};
+
 const playRound = (playerSelection, computerSelection) => {
   switch (playerSelection + "-" + computerSelection) {
     case "rock-rock":
-      console.log("Draw! Rock against Rock");
+      logGameResult("Draw", playerSelection, computerSelection);
       break;
     case "rock-paper":
-      console.log("You Lose! Paper beats Rock.");
+      scores.computer++;
+      logGameResult("Lose", playerSelection, computerSelection);
       break;
     case "rock-scissors":
-      console.log("You Won! Rock beats Scissors.");
+      scores.player++;
+      logGameResult("Won", playerSelection, computerSelection);
       break;
     case "paper-rock":
-      console.log("You Won! Paper beats Rock.");
+      scores.player++;
+      logGameResult("Won", playerSelection, computerSelection);
       break;
     case "paper-paper":
-      console.log("Draw! Paper against paper");
+      logGameResult("Draw", playerSelection, computerSelection);
       break;
     case "paper-scissors":
-      console.log("You Lose! Scissors beats Paper.");
+      scores.computer++;
+      logGameResult("Lose", playerSelection, computerSelection);
       break;
     case "scissors-rock":
-      console.log("You Lose! Rock beats Scissors.");
+      scores.computer++;
+      logGameResult("Lose", playerSelection, computerSelection);
       break;
     case "scissors-paper":
-      console.log("You Won! Scissors beats Paper.");
+      scores.player++;
+      logGameResult("Won", playerSelection, computerSelection);
       break;
     case "scissors-scissors":
-      console.log("Draw! Scissors against Scissors.");
+      logGameResult("Draw", playerSelection, computerSelection);
       break;
   }
 };
 
-playRound(getPlayerChoice(), getComputerChoice());
+const playGame = () => {
+  for (let i = 0; i < 5; i++) {
+    playRound(getPlayerChoice(), getComputerChoice());
+  }
+  if (scores.player > scores.computer)
+    console.log(`YOU WON! ${scores.player}-${scores.computer}`);
+  else console.log(`YOU LOSE! ${scores.player}-${scores.computer}`);
+};
+playGame();
