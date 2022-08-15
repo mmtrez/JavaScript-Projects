@@ -12,9 +12,10 @@ const getComputerChoice = () => {
 };
 
 const getPlayerChoice = () => {
-  const playerChoice = prompt(
-    "rock, paper or scissors ? choose wisely."
-  ).toLowerCase();
+  // const playerChoice = prompt(
+  //   "rock, paper or scissors ? choose wisely."
+  // ).toLowerCase();
+  const playerChoice = "rock";
   if (
     playerChoice !== "rock" &&
     playerChoice !== "paper" &&
@@ -83,3 +84,30 @@ const playGame = () => {
   else console.log(`YOU LOSE! ${scores.player}-${scores.computer}`);
 };
 playGame();
+
+// UI
+const typeEls = document.querySelectorAll(".type");
+const startButtonEl = document.getElementById("start-btn");
+const typeTexts = [
+  "machines are threatening to take over the world ...",
+  "unless you can defeat them in a game of rock paper scissors.",
+];
+let charCounter = 0;
+const typeEffect = (element, text) => {
+  if (charCounter < text.length) {
+    element.textContent += text.charAt(charCounter);
+    charCounter++;
+    setTimeout(() => typeEffect(element, text), 70);
+  } else {
+    charCounter = 0;
+    setTimeout(() => element.classList.add("fade-out"), 1000);
+  }
+};
+typeEls[0].addEventListener("transitionend", (e) => {
+  e.propertyName === "opacity" && typeEffect(typeEls[1], typeTexts[1]);
+});
+typeEls[1].addEventListener("transitionend", (e) => {
+  startButtonEl.classList.remove("transparent");
+  startButtonEl.classList.add("btn-fade-in");
+});
+typeEffect(typeEls[0], typeTexts[0]);
