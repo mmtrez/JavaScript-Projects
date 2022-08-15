@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+img {
+  width: 100%;
+}
+
 body {
   min-height: 100vh;
   display: flex;
@@ -13,6 +17,7 @@ body {
   color: white;
   gap: 2rem;
   background-image: url("./background.jpg");
+  font-family: Impact;
 }
 
 .header {
@@ -37,6 +42,7 @@ body {
   flex: 1;
   display: flex;
   padding: 0.5rem;
+  position: relative;
 }
 
 .landing-content {
@@ -53,12 +59,12 @@ body {
   position: absolute;
   text-align: center;
   line-height: 42px;
-  transition: opacity 0.7s, visibility 0s linear 0.7s;
 }
 
 .fade-out {
   opacity: 0;
   visibility: hidden;
+  transition: opacity 0.7s, visibility 0s linear 0.7s;
 }
 
 .landing-content > button {
@@ -84,20 +90,128 @@ body {
   opacity: 1;
 }
 
-.transparent {
-  opacity: 0;
+.game-content {
+  width: 100%;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: baseline;
+  letter-spacing: 1px;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  position: absolute;
+  left: 0;
 }
 
-@media only screen and (max-width: 375px) {
+.card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: rgb(70, 70, 70);
+  border-radius: 0.5rem;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.score-row > img {
+  width: 50px;
+}
+
+.options {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.option {
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  gap: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 900;
+  box-shadow: 5px 6px 0;
+  cursor: pointer;
+}
+
+.option > img {
+  max-width: 50px;
+}
+
+.transparent {
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 0.7s, opacity 0.7s;
+}
+
+.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.7s;
+}
+
+@media only screen and (max-width: 490px) {
   .header > h1 {
-    font-size: 3.25rem;
+    font-size: 3.5rem;
   }
 
   .header > h2 {
     font-size: 2.5rem;
   }
+  .card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .options {
+    gap: 0.5rem;
+  }
+  .option {
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .header > h1 {
+    font-size: 3rem;
+  }
+
+  .header > h2 {
+    font-size: 2rem;
+  }
 
   .landing-content > p {
     font-size: 1.75rem;
+  }
+
+  .card {
+    padding: 0.75rem;
+  }
+
+  .option {
+    width: 85px;
+    height: 85px;
+  }
+
+  .option > img {
+    max-width: 40px;
   }
 }

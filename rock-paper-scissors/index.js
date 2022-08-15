@@ -88,6 +88,8 @@ playGame();
 // UI
 const typeEls = document.querySelectorAll(".type");
 const startButtonEl = document.getElementById("start-btn");
+const landingContentEl = document.querySelector(".landing-content");
+const gameContentEl = document.querySelector(".game-content");
 const typeTexts = [
   "machines are threatening to take over the world ...",
   "unless you can defeat them in a game of rock paper scissors.",
@@ -104,10 +106,25 @@ const typeEffect = (element, text) => {
   }
 };
 typeEls[0].addEventListener("transitionend", (e) => {
-  e.propertyName === "opacity" && typeEffect(typeEls[1], typeTexts[1]);
+  if (e.propertyName === "opacity") {
+    typeEls[0].classList.add("dnone");
+    typeEffect(typeEls[1], typeTexts[1]);
+  }
 });
 typeEls[1].addEventListener("transitionend", (e) => {
-  startButtonEl.classList.remove("transparent");
+  startButtonEl.classList.remove("hidden");
   startButtonEl.classList.add("btn-fade-in");
+  typeEls[1].classList.add("dnone");
 });
 typeEffect(typeEls[0], typeTexts[0]);
+
+startButtonEl.addEventListener("click", () => {
+  landingContentEl.classList.add("fade-out");
+  landingContentEl.addEventListener("transitionend", (e) => {
+    console.log(e);
+    if (e.propertyName === "opacity") {
+      gameContentEl.classList.remove("transparent");
+      gameContentEl.classList.add("fade-in");
+    }
+  });
+});
