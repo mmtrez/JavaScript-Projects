@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #181818;
+  color: white;
+  font-family: "Aboreto";
+  gap: 3rem;
+  padding: 3rem 1rem;
+}
+
+button {
+  font-family: "Roboto Condensed";
+  padding: 0.5rem;
+}
+
+.app-title {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.settings {
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #202020;
+}
+
+legend {
+  padding: 0 0.5rem;
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.grid-container {
+  display: grid;
+  background-color: #202020;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 450px;
+  height: 450px;
+}
+
+.grid-item {
+  background-color: lime;
+  border: 1px solid red;
+}
+
+.paint {
+  background-color: red;
+}
