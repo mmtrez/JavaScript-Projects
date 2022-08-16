@@ -34,6 +34,7 @@ typeEls[1].addEventListener("transitionend", (e) => {
 typeEffect(typeEls[0], typeTexts[0]);
 
 startButtonEl.addEventListener("click", () => {
+  actionSound.play();
   landingContentEl.classList.add("fade-out");
   landingContentEl.addEventListener("transitionend", (e) => {
     console.log(e);
@@ -45,7 +46,6 @@ startButtonEl.addEventListener("click", () => {
 });
 
 // LOGIC
-
 const playerScoreEl = document.getElementById("player-score");
 const computerScoreEl = document.getElementById("computer-score");
 const [playerRockEl, playerPaperEl, playerScissorsEl] =
@@ -57,6 +57,9 @@ const resEl = document.getElementById("game-res");
 const playerResEl = document.getElementById("player-res");
 const computerResEl = document.getElementById("computer-res");
 const playAgainBtnEl = document.getElementById("playagain");
+const winSound = document.getElementById("win-sound");
+const loseSound = document.getElementById("lose-sound");
+const actionSound = document.getElementById("action-sound");
 const scores = {
   player: 0,
   computer: 0,
@@ -85,6 +88,7 @@ const resetCards = () => {
 };
 
 const playRound = (playerChoice, computerChoice) => {
+  actionSound.play();
   resetCards();
   switch (playerChoice + "-" + computerChoice) {
     case "rock-rock":
@@ -128,9 +132,13 @@ const playGame = (playerChoice) => {
   if (scores.player > 4 || scores.computer > 4) {
     playerResEl.textContent = `Your Score: ${scores.player}`;
     computerResEl.textContent = `Computer Score: ${scores.computer}`;
-    scores.player > 4
-      ? (resEl.textContent = "You Won!")
-      : (resEl.textContent = "You Lost!");
+    if (scores.player > 4) {
+      resEl.textContent = "You Won!";
+      winSound.play();
+    } else {
+      resEl.textContent = "You Lost!";
+      loseSound.play();
+    }
     modalEl.classList.add("fade-in");
   }
 };
@@ -147,4 +155,7 @@ const ResetGame = () => {
 playerRockEl.addEventListener("click", () => playGame("rock"));
 playerPaperEl.addEventListener("click", () => playGame("paper"));
 playerScissorsEl.addEventListener("click", () => playGame("scissors"));
-playAgainBtnEl.addEventListener("click", () => ResetGame());
+playAgainBtnEl.addEventListener("click", () => {
+  actionSound.play();
+  ResetGame();
+});
