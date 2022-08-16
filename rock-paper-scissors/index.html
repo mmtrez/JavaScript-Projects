@@ -14,12 +14,12 @@
       <h2>Man VS Computer</h2>
     </div>
     <div class="container">
-      <!-- <div class="landing-content">
+      <div class="landing-content">
         <p class="type"></p>
         <p class="type"></p>
-        <button class="hidden" id="start-btn">Start Game</button>
-      </div> -->
-      <div class="game-content">
+        <button class="btn hidden" id="start-btn">Start Game</button>
+      </div>
+      <div class="game-content hidden">
         <div class="card">
           <h1 class="card-title">Player</h1>
           <div class="score-row">
@@ -62,6 +62,14 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="modal" class="modal hidden">
+      <div class="modal-container">
+        <h1 id="game-res">You Won!</h1>
+        <h2 id="player-res">Your Score : 5</h2>
+        <h2 id="computer-res">Computer Score : 2</h2>
+        <button id="playagain" class="btn">Play again</button>
       </div>
     </div>
   </body>

@@ -7,7 +7,7 @@ const landingContentEl = document.querySelector(".landing-content");
 const gameContentEl = document.querySelector(".game-content");
 const typeTexts = [
   "machines are threatening to take over the world ...",
-  "unless you can defeat them in a game of rock paper scissors.",
+  "unless you can defeat them in a game of rock paper scissors (5 Rounds)",
 ];
 let charCounter = 0;
 const typeEffect = (element, text) => {
@@ -46,6 +46,17 @@ startButtonEl.addEventListener("click", () => {
 
 // LOGIC
 
+const playerScoreEl = document.getElementById("player-score");
+const computerScoreEl = document.getElementById("computer-score");
+const [playerRockEl, playerPaperEl, playerScissorsEl] =
+  document.querySelectorAll("#player-options > .option");
+const [computerRockEl, computerPaperEl, computerScissorsEl] =
+  document.querySelectorAll("#computer-options > .option");
+const modalEl = document.getElementById("modal");
+const resEl = document.getElementById("game-res");
+const playerResEl = document.getElementById("player-res");
+const computerResEl = document.getElementById("computer-res");
+const playAgainBtnEl = document.getElementById("playagain");
 const scores = {
   player: 0,
   computer: 0,
@@ -57,76 +68,83 @@ const getComputerChoice = () => {
   return choices[randomNumber];
 };
 
-const getPlayerChoice = () => {
-  // const playerChoice = prompt(
-  //   "rock, paper or scissors ? choose wisely."
-  // ).toLowerCase();
-  const playerChoice = "rock";
-  if (
-    playerChoice !== "rock" &&
-    playerChoice !== "paper" &&
-    playerChoice !== "scissors"
-  ) {
-    console.log("Wrong Input. try again.");
-    return getPlayerChoice();
-  } else {
-    return playerChoice;
-  }
+const showGameResult = (result, playerChoiceCard, computerChoiceCard) => {
+  playerScoreEl.textContent = `Score: ${scores.player}`;
+  computerScoreEl.textContent = `Score: ${scores.computer}`;
+  playerChoiceCard.classList.add("player-color");
+  computerChoiceCard.classList.add("computer-color");
 };
 
-const logGameResult = (result, playerSelection, computerSelection) => {
-  console.log(`
-  ${result}! ${playerSelection} against ${computerSelection}.
-  your score: ${scores.player}
-  computer score: ${scores.computer}
-  `);
+const resetCards = () => {
+  playerRockEl.classList.remove("player-color");
+  playerPaperEl.classList.remove("player-color");
+  playerScissorsEl.classList.remove("player-color");
+  computerRockEl.classList.remove("computer-color");
+  computerPaperEl.classList.remove("computer-color");
+  computerScissorsEl.classList.remove("computer-color");
 };
 
-const playRound = (playerSelection, computerSelection) => {
-  console.log(playerSelection, computerSelection);
-  switch (playerSelection + "-" + computerSelection) {
+const playRound = (playerChoice, computerChoice) => {
+  resetCards();
+  switch (playerChoice + "-" + computerChoice) {
     case "rock-rock":
-      logGameResult("Draw", playerSelection, computerSelection);
+      showGameResult("Draw", playerRockEl, computerRockEl);
       break;
     case "rock-paper":
       scores.computer++;
-      logGameResult("Lose", playerSelection, computerSelection);
+      showGameResult("Lose", playerRockEl, computerPaperEl);
       break;
     case "rock-scissors":
       scores.player++;
-      logGameResult("Won", playerSelection, computerSelection);
+      showGameResult("Won", playerRockEl, computerScissorsEl);
       break;
     case "paper-rock":
       scores.player++;
-      logGameResult("Won", playerSelection, computerSelection);
+      showGameResult("Won", playerPaperEl, computerRockEl);
       break;
     case "paper-paper":
-      logGameResult("Draw", playerSelection, computerSelection);
+      showGameResult("Draw", playerPaperEl, computerPaperEl);
       break;
     case "paper-scissors":
       scores.computer++;
-      logGameResult("Lose", playerSelection, computerSelection);
+      showGameResult("Lose", playerPaperEl, computerScissorsEl);
       break;
     case "scissors-rock":
       scores.computer++;
-      logGameResult("Lose", playerSelection, computerSelection);
+      showGameResult("Lose", playerScissorsEl, computerRockEl);
       break;
     case "scissors-paper":
       scores.player++;
-      logGameResult("Won", playerSelection, computerSelection);
+      showGameResult("Won", playerScissorsEl, computerPaperEl);
       break;
     case "scissors-scissors":
-      logGameResult("Draw", playerSelection, computerSelection);
+      showGameResult("Draw", playerScissorsEl, computerScissorsEl);
       break;
   }
 };
 
-const playGame = () => {
-  for (let i = 0; i < 5; i++) {
-    playRound(getPlayerChoice(), getComputerChoice());
+const playGame = (playerChoice) => {
+  playRound(playerChoice, getComputerChoice());
+  if (scores.player > 4 || scores.computer > 4) {
+    playerResEl.textContent = `Your Score: ${scores.player}`;
+    computerResEl.textContent = `Computer Score: ${scores.computer}`;
+    scores.player > 4
+      ? (resEl.textContent = "You Won!")
+      : (resEl.textContent = "You Lost!");
+    modalEl.classList.add("fade-in");
   }
-  if (scores.player > scores.computer)
-    console.log(`YOU WON! ${scores.player}-${scores.computer}`);
-  else console.log(`YOU LOSE! ${scores.player}-${scores.computer}`);
 };
-playGame();
+
+const ResetGame = () => {
+  modalEl.classList.remove("fade-in");
+  playerScoreEl.textContent = "Score: 0";
+  computerScoreEl.textContent = "Score: 0";
+  scores.player = 0;
+  scores.computer = 0;
+  resetCards();
+};
+
+playerRockEl.addEventListener("click", () => playGame("rock"));
+playerPaperEl.addEventListener("click", () => playGame("paper"));
+playerScissorsEl.addEventListener("click", () => playGame("scissors"));
+playAgainBtnEl.addEventListener("click", () => ResetGame());

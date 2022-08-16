@@ -68,7 +68,7 @@ body {
   line-height: 42px;
 }
 
-.landing-content > button {
+.btn {
   font-size: 1.25rem;
   font-family: Silkscreen;
   padding: 0.75rem;
@@ -79,10 +79,15 @@ body {
   border-radius: 0.25rem;
 }
 
-.landing-content > button:hover {
+.btn:hover {
   background-color: lightgray;
   box-shadow: 4px 4px 1px;
   transform: translate(1%, 1%);
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translate(3px, 4px);
 }
 
 .game-content {
@@ -139,6 +144,9 @@ body {
   font-weight: 900;
   box-shadow: 5px 6px 0;
   cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .option:hover {
@@ -147,8 +155,43 @@ body {
   box-shadow: 4px 4px 1px;
 }
 
+.option:active {
+  box-shadow: none;
+  transform: translate(3px, 4px);
+}
+
 .option > img {
   max-width: 50px;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal-container {
+  background-color: white;
+  color: black;
+  padding: 2rem 3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  border: 0.25rem solid black;
+}
+
+.modal-container > .btn {
+  margin-top: 1rem;
+}
+
+.modal-container > h2 {
+  font-weight: 100;
 }
 
 .hidden {
@@ -173,6 +216,14 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.7s, visibility 0s linear 0.7s;
+}
+
+.player-color {
+  background-color: mediumseagreen !important;
+}
+
+.computer-color {
+  background-color: rgb(121, 135, 233) !important;
 }
 
 @media only screen and (max-width: 490px) {
