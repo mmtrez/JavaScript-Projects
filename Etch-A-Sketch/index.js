@@ -85,6 +85,8 @@ modeButtons.forEach((modeButton) => {
 });
 
 clearButton.addEventListener("click", () => {
+  if (activeMode === "eraser")
+    document.querySelector("[data-mode='color']").click();
   makeGrid();
 });
 

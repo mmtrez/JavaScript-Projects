@@ -51,7 +51,7 @@ button:active {
   display: flex;
   justify-content: center;
   gap: 3rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
 }
 
 .settings {
@@ -80,8 +80,8 @@ legend {
   background-color: var(--bg-color-secondary);
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 450px;
-  height: 450px;
+  width: 510px;
+  height: 510px;
 }
 
 .grid-item {
