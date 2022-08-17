@@ -51,6 +51,7 @@ button:active {
   display: flex;
   justify-content: center;
   gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .settings {
@@ -99,4 +100,15 @@ legend {
 .disable {
   opacity: 0.4;
   pointer-events: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .grid-container {
+    padding: 0;
+    border: none;
+    width: 100%;
+  }
+  .grid-container > legend {
+    display: none;
+  }
 }
