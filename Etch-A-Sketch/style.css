@@ -87,6 +87,7 @@ legend {
 .grid-item {
   background-color: white;
   border: 1px solid var(--border-color);
+  user-select: none;
 }
 
 .paint {

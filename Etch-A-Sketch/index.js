@@ -8,21 +8,33 @@ const gridItem = document.createElement("div");
 const modeButtons = document.querySelectorAll("#mode > button");
 const colorPicker = document.getElementById("color-picker");
 const clearButton = document.getElementById("clear-btn");
+const sensitivityButtons = document.querySelectorAll("#sensitivity > button");
 gridItem.classList.add("grid-item");
 let gridSize = sizeInputEl.value; // get default grid size
 let activeMode = "color"; // set default mode
 // let sensetivity = "mousedown";
+let mouseDown = false;
+let sensetivity = "mouseover";
 let paintColor = getComputedStyle(root).getPropertyValue("--paint-color"); // get default primary color from css variables
 sizeTitleEl.textContent = `Size: ${gridSize} x ${gridSize}`; // show default size
 // colorPicker.attributes[8].nodeValue = currentColor; // set default color on color picker
 
+window.onmousedown = () => {
+  mouseDown = true;
+};
+window.onmouseup = () => {
+  mouseDown = false;
+};
+
 const paint = (gridItems) => {
   gridItems.forEach((gridItem) => {
     gridItem.addEventListener("mouseover", function (e) {
-      if (activeMode === "rainbow") {
-        this.style.backgroundColor = paintColor;
-        paintColor = "#" + Math.trunc(Math.random() * 16777215).toString(16);
-      } else this.style.backgroundColor = paintColor; // paint on hover
+      if (sensetivity === "mouseover" ? true : mouseDown) {
+        if (activeMode === "rainbow") {
+          this.style.backgroundColor = paintColor;
+          paintColor = "#" + Math.trunc(Math.random() * 16777215).toString(16);
+        } else this.style.backgroundColor = paintColor; // paint on hover
+      }
     });
   });
 };
@@ -53,7 +65,9 @@ colorPicker.addEventListener("change", (e) => {
 
 modeButtons.forEach((modeButton) => {
   modeButton.addEventListener("click", () => {
-    document.querySelector(".btn-active").classList.remove("btn-active"); // remove class from old acive btn
+    document
+      .querySelector("#mode > .btn-active")
+      .classList.remove("btn-active"); // remove class from old acive btn
     modeButton.classList.add("btn-active"); // add class to current active btn
     activeMode = modeButton.getAttribute("data-mode");
     if (activeMode === "eraser") {
@@ -72,4 +86,14 @@ modeButtons.forEach((modeButton) => {
 
 clearButton.addEventListener("click", () => {
   makeGrid();
+});
+
+sensitivityButtons.forEach((sensitivityButton) => {
+  sensitivityButton.addEventListener("click", () => {
+    sensetivity = sensitivityButton.getAttribute("data-sensitivity");
+    document
+      .querySelector("#sensitivity > .btn-active")
+      .classList.remove("btn-active");
+    sensitivityButton.classList.add("btn-active");
+  });
 });
