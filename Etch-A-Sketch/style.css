@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+:root {
+  --bg-color-primary: #181818;
+  --bg-color-secondary: #202020;
+  --border-color: gainsboro;
+  --primary-color: cadetblue;
+  --paint-color: cadetblue;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #181818;
+  background-color: var(--bg-color-primary);
   color: white;
   font-family: "Aboreto";
   gap: 3rem;
@@ -20,6 +29,18 @@ body {
 button {
   font-family: "Roboto Condensed";
   padding: 0.5rem;
+  font-weight: 900;
+  color: var(--bg-color-secondary);
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  transform: translate(1px, 1px);
+}
+
+button:active {
+  transform: translate(2px, 2px);
 }
 
 .app-title {
@@ -39,7 +60,8 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background-color: #202020;
+  background-color: var(--bg-color-secondary);
+  justify-content: space-between;
 }
 
 legend {
@@ -54,7 +76,7 @@ legend {
 
 .grid-container {
   display: grid;
-  background-color: #202020;
+  background-color: var(--bg-color-secondary);
   padding: 1rem;
   border-radius: 0.5rem;
   width: 450px;
@@ -62,10 +84,19 @@ legend {
 }
 
 .grid-item {
-  background-color: lime;
-  border: 1px solid red;
+  background-color: white;
+  border: 1px solid var(--border-color);
 }
 
 .paint {
-  background-color: red;
+  background-color: var(--paint-color);
+}
+
+.btn-active {
+  background-color: var(--primary-color);
+}
+
+.disable {
+  opacity: 0.4;
+  pointer-events: none;
 }

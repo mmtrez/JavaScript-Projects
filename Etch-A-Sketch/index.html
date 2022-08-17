@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.8/jscolor.min.js"></script>
     <script src="./index.js" defer></script>
     <title>Etch a sketch</title>
   </head>
@@ -14,17 +15,21 @@
       <fieldset id="settings" class="settings">
         <legend>Settings</legend>
         <div class="setting">
-          <p id="size-title">Size: 6 x 6</p>
-          <input type="range" value="6" min="4" max="64" id="size-input" />
+          <p id="size-title"></p>
+          <input type="range" value="12" min="4" max="64" id="size-input" />
         </div>
-        <div class="setting">
+        <div id="mode" class="setting">
           <p>Mode:</p>
-          <button>Color</button>
-          <button>Rainbow</button>
-          <button>Eraser</button>
+          <button data-mode="color" class="btn-active">Color</button>
+          <button data-mode="rainbow">Rainbow</button>
+          <button data-mode="eraser">Eraser</button>
         </div>
         <div class="setting">
-          <button>Clear</button>
+          <p>Select Color:</p>
+          <input id="color-picker" value="#5f9ea0" data-jscolor="" />
+        </div>
+        <div class="setting">
+          <button id="clear-btn">Clear</button>
         </div>
       </fieldset>
       <fieldset id="grid-container" class="grid-container">
