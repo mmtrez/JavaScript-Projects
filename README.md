@@ -4,3 +4,5 @@
 [rock-paper-scissors](https://mmtrez.github.io/JavaScript-Projects/rock-paper-scissors)
 
 [Etch-A-Sketch](https://mmtrez.github.io/JavaScript-Projects/Etch-A-Sketch)
+
+[calculator](https://mmtrez.github.io/JavaScript-Projects/calculator)
