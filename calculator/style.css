@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Nunito&family=Raleway&display=swap");
+
 :root {
-  --screen-bg: rgb(42, 46, 55);
-  --button-primary-bg: rgb(47, 54, 70);
-  --button-secondary-bg: rgb(196, 91, 220);
-  --text-primary-color: rgb(211, 214, 221);
-  --text-secondary-color: rgb(172, 175, 182);
+  --primary-color: rgb(42, 46, 55);
+  --secondary-color: rgb(47, 54, 70);
+  --tertiary-color: rgb(196, 91, 220);
+  --primary-text: rgb(211, 214, 221);
+  --secondary-text: rgb(172, 175, 182);
+  --tertiary-text: rgb(196, 91, 220);
 }
 * {
   margin: 0;
@@ -17,6 +20,7 @@ body {
   display: flex;
   place-content: center;
   place-items: center;
+  font-family: "Nunito";
 }
 
 .container {
@@ -27,7 +31,7 @@ body {
 }
 
 .screen {
-  background-color: var(--screen-bg);
+  background-color: var(--primary-color);
   padding: 3rem 1rem 1rem 1rem;
   display: flex;
   flex-direction: column;
@@ -37,39 +41,54 @@ body {
 }
 
 .display {
-  color: var(--text-secondary-color);
+  color: var(--secondary-text);
   font-size: 1.25rem;
 }
 
 .calc-input {
-  color: var(--text-primary-color);
+  color: var(--primary-text);
   background-color: inherit;
   width: 100%;
   border: none;
   outline: none;
-  caret-color: var(--text-primary-color);
   caret-color: transparent;
   font-size: 62px;
   text-align: end;
+  font-family: "Nunito";
 }
 
 .buttons-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background-color: var(--screen-bg);
+  background-color: var(--primary-color);
 }
 
 button {
   height: 75px;
   border: none;
-  background-color: var(--button-primary-bg);
-  color: var(--text-primary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-text);
   font-size: 1.5rem;
+  font-family: "Nunito";
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  transition: background-color 0.3s;
 }
 
 .equal-button {
   grid-row: 4 / span 2;
   height: unset;
   grid-column: 4;
+}
+
+.tertiary-text {
+  color: var(--tertiary-text);
+}
+
+.tertiary-bg {
+  background-color: var(--tertiary-color);
 }
