@@ -43,6 +43,7 @@ body {
 .display {
   color: var(--secondary-text);
   font-size: 1.25rem;
+  height: 30px;
 }
 
 .calc-input {
