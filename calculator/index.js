@@ -59,6 +59,7 @@ digitsEl.forEach((digitEl) =>
       console.log("here1");
     } else {
       console.log("here2");
+      inputEl.value = fDigit;
       fDigit += e.target.value;
       inputEl.value += e.target.value;
     }
@@ -72,15 +73,19 @@ operatorsEl.forEach((operatorEl) =>
       displayEl.textContent = "";
       inputEl.value = operate(fDigit, operator, sDigit);
       fDigit = inputEl.value;
-      operator = "";
+      // operator = "";
       sDigit = "";
+      // fDigit = "";
     } else if (operator) {
+      if (!sDigit) return;
+      console.log("hi1");
       fDigit = operate(fDigit, operator, sDigit);
       sDigit = "";
       operator = e.target.value;
       displayEl.textContent += inputEl.value + " " + e.target.value + " ";
       inputEl.value = fDigit;
     } else {
+      console.log("hi2");
       operator = e.target.value;
       displayEl.textContent += inputEl.value + " " + e.target.value + " ";
       inputEl.value = "";
