@@ -73,11 +73,9 @@ operatorsEl.forEach((operatorEl) =>
       displayEl.textContent = "";
       inputEl.value = operate(fDigit, operator, sDigit);
       fDigit = inputEl.value;
-      // operator = "";
+      operator = "";
       sDigit = "";
-      // fDigit = "";
     } else if (operator) {
-      if (!sDigit) return;
       console.log("hi1");
       fDigit = operate(fDigit, operator, sDigit);
       sDigit = "";
@@ -111,3 +109,7 @@ backSpaceBtnEl.addEventListener("click", (e) => {
     inputEl.value = fDigit;
   }
 });
+
+// ! BUGS:
+// ! 1) enter the following : 2, +, + : in should not be able to insert to operators in a row.
+// ! 2) enter : 2, +, 2, =, 4 : it should clear the input and put only 4.
