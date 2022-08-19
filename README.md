@@ -1,4 +1,4 @@
-# JavaScri9pt-Projects
+# JavaScript-Projects
 [Drum-Kit](https://mmtrez.github.io/JavaScript-Projects/Drum-Kit)
 
 [rock-paper-scissors](https://mmtrez.github.io/JavaScript-Projects/rock-paper-scissors)
