@@ -53,9 +53,12 @@ digitsEl.forEach((digitEl) =>
   digitEl.addEventListener("click", (e) => {
     console.log(e.target.value);
     if (operator) {
+      inputEl.value = sDigit;
       sDigit += e.target.value;
       inputEl.value += e.target.value;
+      console.log("here1");
     } else {
+      console.log("here2");
       fDigit += e.target.value;
       inputEl.value += e.target.value;
     }
@@ -68,12 +71,15 @@ operatorsEl.forEach((operatorEl) =>
     if (e.target.value === "=") {
       displayEl.textContent = "";
       inputEl.value = operate(fDigit, operator, sDigit);
+      fDigit = inputEl.value;
+      operator = "";
+      sDigit = "";
     } else if (operator) {
       fDigit = operate(fDigit, operator, sDigit);
       sDigit = "";
       operator = e.target.value;
       displayEl.textContent += inputEl.value + " " + e.target.value + " ";
-      inputEl.value = "";
+      inputEl.value = fDigit;
     } else {
       operator = e.target.value;
       displayEl.textContent += inputEl.value + " " + e.target.value + " ";
@@ -92,4 +98,11 @@ clearBtnEl.addEventListener("click", (e) => {
 
 backSpaceBtnEl.addEventListener("click", (e) => {
   console.log("backspace");
+  if (sDigit) {
+    sDigit = sDigit.slice(0, sDigit.length - 1);
+    inputEl.value = sDigit;
+  } else {
+    fDigit = fDigit.slice(0, fDigit.length - 1);
+    inputEl.value = fDigit;
+  }
 });
