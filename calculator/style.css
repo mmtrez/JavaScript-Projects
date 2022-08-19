@@ -21,6 +21,7 @@ body {
   place-content: center;
   place-items: center;
   font-family: "Nunito";
+  background-color: var(--primary-color);
 }
 
 .container {
@@ -28,6 +29,7 @@ body {
   width: 300px;
   border-radius: 2rem;
   overflow: hidden;
+  border: 0.25rem solid var(--primary-text);
 }
 
 .screen {

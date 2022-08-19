@@ -1,4 +1,5 @@
 "use strict";
+
 // Nodes
 const digitsEl = document.querySelectorAll('button[data-action="digit"]');
 const operatorsEl = document.querySelectorAll('button[data-action="operator"]');
