@@ -11,12 +11,8 @@ const displayEl = document.getElementById("display");
 const inputEl = document.getElementById("calc-input");
 
 // Variables
-let fDigit = "",
-  operator = "",
-  sDigit = "",
-  temp = 0;
-
-// Set and Get Defaults
+let temp = "";
+let state = "";
 
 // Functions
 const sum = (a, b) => {
@@ -44,72 +40,79 @@ const operate = (a, op, b) => {
       : op === "x"
       ? multiply(a, b)
       : division(a, b);
-  console.log(`${a} ${op} ${b} = ${res}`);
   return res;
+};
+
+const isDigit = (value) => {
+  return value && !isNaN(value);
+};
+
+const myEval = (task) => {
+  const { digits, operators } = task.split(/([+,-,x,÷])/g).reduce(
+    (obj, value) => {
+      isDigit(value) ? obj.digits.push(value) : obj.operators.push(value);
+      return obj;
+    },
+    {
+      digits: [],
+      operators: [],
+    }
+  );
+
+  const { result } = operators.reduce(
+    (obj, operator) => {
+      obj.result = operate(obj.result, operator, digits[obj.index + 1]);
+      obj.index++;
+      return obj;
+    },
+    {
+      result: digits[0],
+      index: 0,
+    }
+  );
+
+  return result;
 };
 
 // Events
 digitsEl.forEach((digitEl) =>
   digitEl.addEventListener("click", (e) => {
-    console.log(e.target.value);
-    if (operator) {
-      inputEl.value = sDigit;
-      sDigit += e.target.value;
-      inputEl.value += e.target.value;
-      console.log("here1");
+    if (state === "done") {
+      // after pressing =
+      temp = e.target.value;
+      state = "";
+      displayEl.textContent = "";
     } else {
-      console.log("here2");
-      inputEl.value = fDigit;
-      fDigit += e.target.value;
-      inputEl.value += e.target.value;
+      // = has not been pressed
+      temp += e.target.value;
     }
+    inputEl.value = temp;
   })
 );
 
 operatorsEl.forEach((operatorEl) =>
   operatorEl.addEventListener("click", (e) => {
-    console.log(e.target.value);
+    const tempLastChar = temp[temp.length - 1];
     if (e.target.value === "=") {
-      displayEl.textContent = "";
-      inputEl.value = operate(fDigit, operator, sDigit);
-      fDigit = inputEl.value;
-      operator = "";
-      sDigit = "";
-    } else if (operator) {
-      console.log("hi1");
-      fDigit = operate(fDigit, operator, sDigit);
-      sDigit = "";
-      operator = e.target.value;
-      displayEl.textContent += inputEl.value + " " + e.target.value + " ";
-      inputEl.value = fDigit;
-    } else {
-      console.log("hi2");
-      operator = e.target.value;
-      displayEl.textContent += inputEl.value + " " + e.target.value + " ";
-      inputEl.value = "";
+      displayEl.textContent = inputEl.value;
+      inputEl.value = myEval(temp);
+      temp = inputEl.value;
+      state = "done";
+    } else if (isDigit(tempLastChar)) {
+      state === "done" && (state = "");
+      temp += e.target.value;
+      inputEl.value = temp;
     }
   })
 );
 
 clearBtnEl.addEventListener("click", (e) => {
-  fDigit = "";
-  sDigit = "";
-  operator = "";
-  displayEl.textContent = "";
+  temp = "";
   inputEl.value = "";
+  displayEl.textContent = "";
 });
 
 backSpaceBtnEl.addEventListener("click", (e) => {
-  console.log("backspace");
-  if (sDigit) {
-    sDigit = sDigit.slice(0, sDigit.length - 1);
-    inputEl.value = sDigit;
-  } else {
-    fDigit = fDigit.slice(0, fDigit.length - 1);
-    inputEl.value = fDigit;
-  }
+  temp = temp.slice(0, temp.length - 1); // remove last char
+  inputEl.value = temp;
 });
-
-// ! BUGS:
-// ! 1) enter the following : 2, +, + : in should not be able to insert to operators in a row.
-// ! 2) enter : 2, +, 2, =, 4 : it should clear the input and put only 4.
