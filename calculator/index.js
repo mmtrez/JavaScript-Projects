@@ -48,7 +48,7 @@ const isDigit = (value) => {
 };
 
 const myEval = (task) => {
-  const { digits, operators } = task.split(/([+,-,x,÷])/g).reduce(
+  const { digits, operators } = task.split(/([-,x,+,÷])/g).reduce(
     (obj, value) => {
       isDigit(value) ? obj.digits.push(value) : obj.operators.push(value);
       return obj;
@@ -58,6 +58,8 @@ const myEval = (task) => {
       operators: [],
     }
   );
+
+  console.log(digits, operators);
 
   const { result } = operators.reduce(
     (obj, operator) => {
@@ -93,12 +95,12 @@ digitsEl.forEach((digitEl) =>
 operatorsEl.forEach((operatorEl) =>
   operatorEl.addEventListener("click", (e) => {
     const tempLastChar = temp[temp.length - 1];
-    if (e.target.value === "=") {
+    if (e.target.value === "=" && isDigit(tempLastChar) && state !== "done") {
       displayEl.textContent = inputEl.value;
       inputEl.value = myEval(temp);
       temp = inputEl.value;
       state = "done";
-    } else if (isDigit(tempLastChar)) {
+    } else if (isDigit(tempLastChar) && e.target.value !== "=") {
       state === "done" && (state = "");
       temp += e.target.value;
       inputEl.value = temp;
