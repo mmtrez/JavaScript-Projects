@@ -16,19 +16,23 @@ let state = "";
 
 // Functions
 const sum = (a, b) => {
-  return +a + +b;
+  const res = +a + +b;
+  return res > 0 ? res : `neg${Math.abs(res)}`;
 };
 
 const subtract = (a, b) => {
-  return +a - +b;
+  const res = +a - +b;
+  return res > 0 ? res : `neg${Math.abs(res)}`;
 };
 
 const multiply = (a, b) => {
-  return +a * +b;
+  const res = +a * +b;
+  return res > 0 ? res : `neg${Math.abs(res)}`;
 };
 
 const division = (a, b) => {
-  return +a / +b;
+  const res = +a / +b;
+  return res > 0 ? res : `neg${Math.abs(res)}`;
 };
 
 const operate = (a, op, b) => {
@@ -47,10 +51,26 @@ const isDigit = (value) => {
   return value && !isNaN(value);
 };
 
+const isOperator = (value) => {
+  if (
+    value.includes("+") ||
+    value.includes("-") ||
+    value.includes("x") ||
+    value.includes("÷")
+  )
+    return true;
+  else return false;
+};
+
 const myEval = (task) => {
   const { digits, operators } = task.split(/([-,x,+,÷])/g).reduce(
     (obj, value) => {
-      isDigit(value) ? obj.digits.push(value) : obj.operators.push(value);
+      if (isOperator(value)) obj.operators.push(value);
+      else {
+        if (value.includes("neg"))
+          obj.digits.push(`-${value.substring(value.indexOf("g") + 1)}`);
+        else obj.digits.push(value);
+      }
       return obj;
     },
     {
@@ -118,3 +138,5 @@ backSpaceBtnEl.addEventListener("click", (e) => {
   temp = temp.slice(0, temp.length - 1); // remove last char
   inputEl.value = temp;
 });
+
+// ! KNOWN BUG: 1) Has problems with negative
