@@ -1,5 +1,4 @@
 "use strict"; // Nodes
-// const digitsEl = document.querySelectorAll('button[data-action="digit"]');
 const operatorsEl = document.querySelectorAll('button[data-action="operator"]');
 const clearBtnEl = document.querySelector('button[data-action="clear"]');
 const backSpaceBtnEl = document.querySelector(
@@ -22,7 +21,6 @@ buttonsContainer.addEventListener("click", ({ target: btn }) => {
 // Keyboard Events
 window.addEventListener("keydown", ({ key }) => {
   key === "*" ? (key = "x") : key === "/" ? (key = "÷") : "";
-  console.log(key);
   if (isDigit(key)) handleDigitClicked(key);
   else if (isOperator(key)) handleOperatorClicked(key);
   else if (key === "Backspace") handleBackSpace();
@@ -43,7 +41,10 @@ const handleBackSpace = () => {
   inputEl.value = curVal.slice(0, curVal.length - 1);
 };
 
-const handleAllClear = () => (inputEl.value = "");
+const handleAllClear = () => {
+  inputEl.value = "";
+  displayEl.textContent = "";
+};
 
 const multiplication = (arr, index) => {
   return +arr[index - 1] * +arr[index + 1];
@@ -70,7 +71,6 @@ const getPrePostStr = (arr, index) => {
 const handleCalculation = () => {
   let inputStr = inputEl.value;
   let inputArr = inputStr.split(/([-,x,+,÷])/g);
-  console.log(inputArr);
 
   // handle multiplication and division first
   for (let i = 0; inputArr.some((char) => char === "x" || char === "÷"); i++) {
@@ -83,7 +83,6 @@ const handleCalculation = () => {
           ? division(inputArr, i)
           : "";
       inputArr = [...preStr, solve, ...postStr];
-      console.log(inputArr);
     }
   }
 
@@ -98,7 +97,6 @@ const handleCalculation = () => {
           ? subtraction(inputArr, i)
           : "";
       inputArr = [...preStr, solve, ...postStr];
-      console.log(inputArr);
     }
   }
   displayEl.textContent = inputArr.join("");
