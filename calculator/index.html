@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="./index.js" defer></script>
+    <script defer src="./calc.js" defer></script>
     <title>Calculator</title>
   </head>
   <body>
     <div class="container">
       <div class="screen">
         <p id="display" class="display"></p>
-        <input type="text" class="calc-input" id="calc-input" />
+        <input type="text" class="calc-input" id="calc-input" readonly />
       </div>
       <div class="buttons-container">
         <button value="ac" data-action="clear" class="tertiary-text">AC</button>
@@ -36,16 +36,12 @@
         <button value="1" data-action="digit">1</button>
         <button value="2" data-action="digit">2</button>
         <button value="3" data-action="digit">3</button>
-        <button
-          value="="
-          data-action="operator"
-          class="equal-button tertiary-bg"
-        >
+        <button value="=" data-action="equal" class="equal-button tertiary-bg">
           =
         </button>
         <button>.</button>
         <button value="0" data-action="digit">0</button>
-        <button value="%" data-action="operator">%</button>
+        <button value="%">%</button>
       </div>
     </div>
   </body>
