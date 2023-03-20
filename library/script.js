@@ -36,15 +36,29 @@ function addBook(e) {
 
 function toggleReadStatus(e) {
   const id = +e.target.closest(".book").dataset.id;
-  library.forEach((book, index) => {
+  console.log(id);
+  library = library.map((book) => {
     if (book.id === id) {
-      library[index] = { ...book, read: !book.read };
       document.querySelector(`[data-id="${id}"] .read`).textContent = `Read: ${
-        library[index].read ? "Yes" : "Not yet"
+        !book.read ? "Yes" : "Not yet"
       }`;
-    }
+      console.log("here");
+      return { ...book, read: !book.read };
+    } else return book;
   });
+  console.log(library);
   localStorage.setItem("library", JSON.stringify(library));
+  // library.forEach((book, index) => {
+  //   console.log(index);
+  //   if (book.id === id) {
+  //     library[index] = { ...book, read: !book.read };
+  //     // console.log(library[index]);
+  //     document.querySelector(`[data-id="${id}"] .read`).textContent = `Read: ${
+  //       library[index].read ? "Yes" : "Not yet"
+  //     }`;
+  //   }
+  // });
+  // localStorage.setItem("library", JSON.stringify(library));
 }
 
 function deleteBook(e) {
@@ -69,14 +83,6 @@ function renderBooks(books) {
   </div>`;
     booksContainer.insertAdjacentHTML("beforeend", html);
   });
-  document
-    .querySelectorAll(".toggle-read")
-    .forEach((btn) =>
-      btn.addEventListener("click", (e) => toggleReadStatus(e))
-    );
-  document
-    .querySelectorAll(".remove")
-    .forEach((btn) => btn.addEventListener("click", (e) => deleteBook(e)));
 }
 renderBooks(library);
 
@@ -104,3 +110,9 @@ addBtn.addEventListener("click", openForm);
 closeAsideBtn.addEventListener("click", closeForm);
 
 form.addEventListener("submit", (e) => addBook(e));
+
+booksContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("toggle-read")) {
+    toggleReadStatus(e);
+  } else if (e.target.classList.contains("remove")) deleteBook(e);
+});
