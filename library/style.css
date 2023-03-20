@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+:root {
+  --spacing-default: 40px;
+  --bg-color: #fffbfb;
+  --bg-primary: #f0eef1;
+  --shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --invalid-color: crimson;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Ubuntu";
+}
+header {
+  box-shadow: --shadow;
+  display: flex;
+  justify-content: space-between;
+  padding: 28px var(--spacing-default);
+  background-color: var(--bg-color);
+  align-items: center;
+  position: relative;
+}
+header .title,
+aside .title {
+  font-size: 36px;
+}
+.logo {
+  width: 22px;
+  position: relative;
+  inset-inline-end: -4px;
+  top: -10px;
+}
+.add {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  padding: 12px 20px;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.add span {
+  font-size: 24px;
+}
+main {
+  flex-grow: 1;
+  background-color: var(--bg-primary);
+  padding: var(--spacing-default);
+}
+.tools {
+  background-color: var(--bg-color);
+  padding: 10px 18px;
+  border-radius: 4px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+.tools select {
+  width: 160px;
+  padding: 6px 0px;
+  font-size: 14px;
+  border-color: transparent;
+  background-color: var(--bg-primary);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.books {
+  margin-top: var(--spacing-default);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.book {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--bg-color);
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+.book .title {
+  font-size: 28px;
+}
+.book .author {
+  font-size: 18px;
+  font-weight: 600;
+}
+.book .author span {
+  font-size: 16px;
+}
+.book .pages {
+  margin-top: 12px;
+}
+.book .read {
+  margin-bottom: 14px;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+.btns .add {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+aside {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: clamp(200px, 70%, 300px);
+  background-color: var(--bg-color);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transform: translate(-100%);
+}
+aside.open {
+  transform: translate(0);
+}
+aside .title {
+  text-align: center;
+  margin-bottom: 32px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.input-block {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px 0;
+}
+aside input {
+  border: none;
+  border-bottom: 2px solid var(--bg-primary);
+  padding: 6px;
+  font-size: 16px;
+  font-family: "Ubuntu";
+  transition: 0.2s;
+}
+aside input:focus {
+  outline: none;
+  border-color: #000;
+}
+aside input:valid {
+  border-color: green;
+}
+aside input:focus + label,
+aside input:valid + label {
+  top: 0;
+}
+aside input.invalid {
+  border-color: var(--invalid-color);
+}
+aside input.invalid + label {
+  color: var(--invalid-color);
+}
+aside input.invalid ~ .err {
+  opacity: 1;
+  color: var(--invalid-color);
+}
+aside label {
+  position: absolute;
+  transition: 0.2s;
+  top: 26px;
+}
+aside .err {
+  margin-top: 6px;
+  opacity: 0;
+}
+aside .add {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+aside .close {
+  margin-top: 10px;
+}
+.check {
+  flex-direction: row;
+  gap: 12px;
+}
+.check label {
+  position: unset;
+}
+
+@media screen and (max-width: 450px) {
+  :root {
+    --spacing-default: 20px;
+  }
+}

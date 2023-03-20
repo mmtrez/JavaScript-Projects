@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Library<img src="./assets/logo.svg" class="logo" /></h1>
+      <button class="add">Add Book</button>
+    </header>
+    <main>
+      <div class="tools">
+        <label for="sort">Sort By: </label>
+        <select name="sort" id="sort">
+          <option value="title">title</option>
+          <option value="number of pages">title</option>
+        </select>
+      </div>
+      <div class="books"></div>
+    </main>
+    <aside>
+      <h1 class="title">Library<img src="./assets/logo.svg" class="logo" /></h1>
+      <form>
+        <div class="input-block">
+          <input type="text" name="title" id="title" required />
+          <label for="title">Title</label>
+          <p class="err">Title is required</p>
+        </div>
+        <div class="input-block">
+          <input type="text" name="author" id="author" required />
+          <label for="author">author</label>
+          <p class="err">author is required</p>
+        </div>
+        <div class="input-block">
+          <input type="text" name="pages" id="pages" required />
+          <label for="pages">pages</label>
+          <p class="err">pages is required</p>
+        </div>
+        <div class="input-block check">
+          <label for="read">Have you read this book ?</label>
+          <input type="checkbox" name="read" id="read" />
+        </div>
+        <button type="submit" class="add submit">Add Book</button>
+        <button class="add close" type="button">Close</button>
+      </form>
+    </aside>
+  </body>
+</html>
