@@ -1,5 +1,6 @@
 "use strict";
 
+// Elements
 const booksContainer = document.querySelector(".books");
 const inputEls = document.querySelectorAll("input");
 const addBtn = document.querySelector("header .add");
@@ -7,8 +8,12 @@ const formAside = document.querySelector("aside");
 const closeAsideBtn = document.querySelector(".close");
 const submitForm = document.querySelector(".submit");
 const form = document.querySelector("form");
+const sortEl = document.querySelector('[name="sort"]');
+
+// my library
 let library = JSON.parse(localStorage.getItem("library")) || [];
 
+// Constructor
 function Book(title, author, pages, read, id) {
   this.title = title;
   this.author = author;
@@ -16,6 +21,9 @@ function Book(title, author, pages, read, id) {
   this.read = read;
   this.id = id;
 }
+
+const setLocalStorage = () =>
+  localStorage.setItem("library", JSON.stringify(library));
 
 function addBook(e) {
   e.preventDefault();
@@ -27,49 +35,33 @@ function addBook(e) {
   } = e.target;
   const book = new Book(title, author, pages, read, Date.now());
   library.push(book);
-  localStorage.setItem("library", JSON.stringify(library));
+  setLocalStorage();
   e.target.reset();
-  console.log(e);
-  formAside.classList.remove("open");
+  closeForm();
   renderBooks([book]);
 }
 
 function toggleReadStatus(e) {
   const id = +e.target.closest(".book").dataset.id;
-  console.log(id);
   library = library.map((book) => {
     if (book.id === id) {
       document.querySelector(`[data-id="${id}"] .read`).textContent = `Read: ${
         !book.read ? "Yes" : "Not yet"
       }`;
-      console.log("here");
       return { ...book, read: !book.read };
     } else return book;
   });
-  console.log(library);
-  localStorage.setItem("library", JSON.stringify(library));
-  // library.forEach((book, index) => {
-  //   console.log(index);
-  //   if (book.id === id) {
-  //     library[index] = { ...book, read: !book.read };
-  //     // console.log(library[index]);
-  //     document.querySelector(`[data-id="${id}"] .read`).textContent = `Read: ${
-  //       library[index].read ? "Yes" : "Not yet"
-  //     }`;
-  //   }
-  // });
-  // localStorage.setItem("library", JSON.stringify(library));
+  setLocalStorage();
 }
 
 function deleteBook(e) {
   const id = +e.target.closest(".book").dataset.id;
   library = library.filter((book) => id !== book.id);
-  localStorage.setItem("library", JSON.stringify(library));
+  setLocalStorage();
   document.querySelector(`[data-id="${id}"]`).remove();
 }
 
 function renderBooks(books) {
-  console.log(books);
   books?.forEach(({ title, author, pages, read, id }) => {
     const html = `<div class="book" data-id="${id}">
     <h1 class="title">${title}</h1>
@@ -116,3 +108,11 @@ booksContainer.addEventListener("click", (e) => {
     toggleReadStatus(e);
   } else if (e.target.classList.contains("remove")) deleteBook(e);
 });
+
+const handleSort = (type) => {
+  [...booksContainer.children].forEach((child) => child.remove());
+  library.sort((a, b) => (a[type][0] < b[type][0] ? -1 : 1));
+  renderBooks(library);
+};
+
+sortEl.addEventListener("change", (e) => handleSort(e.target.value));
