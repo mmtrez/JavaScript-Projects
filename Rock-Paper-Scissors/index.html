@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./index.js" defer></script>
+    <title>Rock, Paper, Scissors!</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Rock Paper Scissors</h1>
+      <h2>Man VS Computer</h2>
+    </div>
+    <div class="container">
+      <div class="landing-content">
+        <p class="type"></p>
+        <p class="type"></p>
+        <button class="btn hidden" id="start-btn">Start Game</button>
+      </div>
+      <div class="game-content hidden">
+        <div class="card">
+          <h1 class="card-title">Player</h1>
+          <div class="score-row">
+            <img src="./assets/images/user.png" alt="player image" />
+            <p id="player-score" class="score">Score: 0</p>
+          </div>
+          <div id="player-options" class="options">
+            <div class="option">
+              <p class="option-name">rock</p>
+              <img src="./assets/images/rock.png" alt="rock image" />
+            </div>
+            <div class="option">
+              <p class="option-name">paper</p>
+              <img src="./assets/images/paper.png" alt="paper image" />
+            </div>
+            <div class="option">
+              <p class="option-name">scissors</p>
+              <img src="./assets/images/scissors.png" alt="scissors image" />
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h1 class="card-title">Computer</h1>
+          <div class="score-row">
+            <img src="./assets/images/robot.png" alt="bot image" />
+            <p id="computer-score" class="score">Score: 0</p>
+          </div>
+          <div id="computer-options" class="options">
+            <div class="option">
+              <p class="option-name">rock</p>
+              <img src="./assets/images/rock.png" alt="rock image" />
+            </div>
+            <div class="option">
+              <p class="option-name">paper</p>
+              <img src="./assets/images/paper.png" alt="paper image" />
+            </div>
+            <div class="option">
+              <p class="option-name">scissors</p>
+              <img src="./assets/images/scissors.png" alt="scissors image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modal" class="modal hidden">
+      <div class="modal-container">
+        <h1 id="game-res">You Won!</h1>
+        <h2 id="player-res">Your Score : 5</h2>
+        <h2 id="computer-res">Computer Score : 2</h2>
+        <button id="playagain" class="btn">Play again</button>
+      </div>
+    </div>
+    <audio id="lose-sound" src="./assets/audio/lose.wav"></audio>
+    <audio id="win-sound" src="./assets/audio/win.wav"></audio>
+    <audio id="action-sound" src="./assets/audio/action.mp3"></audio>
+  </body>
+</html>
