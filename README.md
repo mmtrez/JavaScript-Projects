@@ -1,8 +1,11 @@
 # JavaScript-Projects
+
 [Drum-Kit](https://mmtrez.github.io/JavaScript-Projects/Drum-Kit)
 
-[rock-paper-scissors](https://mmtrez.github.io/JavaScript-Projects/rock-paper-scissors)
+[Rock-Paper-Scissors](https://mmtrez.github.io/JavaScript-Projects/rock-paper-scissors)
 
 [Etch-A-Sketch](https://mmtrez.github.io/JavaScript-Projects/Etch-A-Sketch)
 
-[calculator](https://mmtrez.github.io/JavaScript-Projects/calculator)
+[Calculator](https://mmtrez.github.io/JavaScript-Projects/calculator)
+
+[Library](https://mmtrez.github.io/JavaScript-Projects/library/)
