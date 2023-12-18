@@ -9,3 +9,5 @@
 [Calculator](https://mmtrez.github.io/JavaScript-Projects/calculator)
 
 [Library](https://mmtrez.github.io/JavaScript-Projects/library/)
+
+[Tic-Tac-Toe](https://mmtrez.github.io/JavaScript-Projects/Tic-Tac-Toe/dist/)
